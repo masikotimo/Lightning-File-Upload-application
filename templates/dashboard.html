@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Dashboard</h2>
+    {% if balance %}
+        <p>Your balance: {{ balance }} satoshis</p>
+        <form method="POST" action="{{ url_for('dashboard') }}">
+            <input type="submit" value="Deposit">
+        </form>
+    {% else %}
+        <p>No balance yet. Deposit some satoshis to get started.</p>
+    {% endif %}
+    <p><a href="{{ url_for('logout') }}">Logout</a></p>
+</body>
+</html>
