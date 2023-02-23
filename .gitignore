@@ -1,0 +1,11 @@
+/*.pyc
+/.coverage
+/.envrc
+/.env
+__pycache__
+venv
+.vscode/
+flask_session/
+__pycache__/
+uploads/
+.DS_STORE

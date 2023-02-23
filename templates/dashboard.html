@@ -8,6 +8,8 @@
     {% if balance %}
         <p>Your balance: {{ balance }} satoshis</p>
         <form method="POST" action="{{ url_for('dashboard') }}">
+            <label>Amount to deposit</label>
+            <input type="text" name="amount" required><br><br>
             <input type="submit" value="Deposit">
         </form>
     {% else %}

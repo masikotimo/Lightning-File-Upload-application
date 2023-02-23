@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Upload Document</title>
+    </head>
+    <body>
+        <h1>Upload Document</h1>
+        <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload_file') }}">
+            <input type="file" name="file">
+            <input type="submit" value="Upload" required>
+        </form>
+    </body>
+</html>
