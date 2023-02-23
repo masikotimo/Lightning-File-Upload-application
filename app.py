@@ -3,17 +3,11 @@ import os
 import sqlite3
 from lnd_grpc import Client
 from werkzeug.utils import secure_filename
-
-lnd_dir = "/Users/timothy/.polar/networks/4/volumes/lnd"
-tls_cert_path= "/Users/timothy/.polar/networks/4/volumes/lnd/alice/tls.cert"
-grpc_host = "127.0.0.1"
-grpc_port = 10002
-macaroon_path = "/Users/timothy/.polar/networks/4/volumes/lnd/alice/data/chain/bitcoin/regtest/admin.macaroon"
-network = "regtest"
+from constants import lnd_dir, tls_cert_path, grpc_port, grpc_host,macaroon_path,network
 
 
 app = Flask(__name__)
-app.secret_key = 'secret_key'  # I shall change this
+app.secret_key = os.urandom(24)  
 
 # Set up LND client
 lnd = Client(lnd_dir = lnd_dir,macaroon_path= macaroon_path, tls_cert_path= tls_cert_path,network = network,grpc_host= grpc_host,grpc_port=grpc_port)
@@ -162,7 +156,7 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-            c.execute("UPDATE users SET balance=balance+? WHERE username=?", ((balance-1) , session['username']))
+            c.execute("UPDATE users SET balance=? WHERE username=?", ((balance-1) , session['username']))
             conn.commit()
             return 'File uploaded successfully'
         else:
